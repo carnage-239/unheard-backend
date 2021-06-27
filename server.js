@@ -35,10 +35,10 @@ app.get("/", (req, res) => {
 });
 
 app.get("/blog", async (req, res) => {
-  const allUsers = await User.find();
-  const users = allUsers.map((user) => user.name);
-  const songs = allUsers.map((user) => user.songs);
-  return res.json({ users, songs });
+  const users = await User.find();
+  // const users = allUsers.map((user) => user.name);
+  // const songs = allUsers.map((user) => user.songs);
+  return res.json({ users });
 });
 
 PORT = process.env.PORT || 5000;
