@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const userRouter = require("./routes/user");
 const fileRouter = require("./routes/file");
+const User = require("./models/User");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -31,6 +32,13 @@ app.use("/files", fileRouter);
 
 app.get("/", (req, res) => {
   res.json({ alive: true });
+});
+
+app.get("/blog", async (req, res) => {
+  const allUsers = await User.find();
+  const users = allUsers.map((user) => user.name);
+  const songs = allUsers.map((user) => user.songs);
+  return res.json({ users, songs });
 });
 
 PORT = process.env.PORT || 5000;
